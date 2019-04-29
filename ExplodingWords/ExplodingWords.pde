@@ -18,17 +18,5 @@ void draw() {
 
 
 void mousePressed() {
-  if (stopped) {
-    loop();
-    stopped = false;
-  } else {
-    noLoop();
-    stopped = true;
-  }
-  //noLoop();
-
-  //p.pman.particles.add(new Particle(mouseX, mouseY, random(-1, 1), random(-1, 1), 0.0, 0.0, 0));
-  color newbkgnd = color(red(bkgnd), green(bkgnd), blue(bkgnd), alpha(bkgnd)-1);
-  println(alpha(bkgnd)-1);
-  bkgnd = newbkgnd;
+  p.curSteps = 0;
 }

@@ -1,7 +1,10 @@
 class Particle {
   float x, y;
+  //float velXFactor, velYFactor;
+  float velFact;
   float velx, vely;
-  float ax, ay;
+  //float ax, ay;
+  //float axstep, aystep;
   color c;
   float dalpha;
   final float minVel = 0.001;
@@ -9,14 +12,15 @@ class Particle {
   int curFadeSteps = 0;
 
 
-  Particle(float xx, float yy, float vx, float vy, float axx, float ayy, int steps) {
+  Particle(float xx, float yy, float vx, float vy, float velFactor, int steps) {
     x = xx;
     y = yy;
+
     velx = vx;
     vely = vy;
-    ax = axx;
-    ay = ayy;
-    //println(vx, vy, axx, ayy, steps, axx*steps, ayy*steps);
+
+    velFact = velFactor;
+
     c = color(255, 0, 0);
     fadeSteps = steps;
     dalpha = 255.0/fadeSteps;
@@ -29,12 +33,12 @@ class Particle {
   void move() {
     x += velx;
     y += vely;
-    velx += ax;
-    vely += ay;
+    velx /= velFact;
+    vely /= velFact;
   }
   void display() {
     noStroke();
-    c = color(red(c), green(c), blue(c), alpha(c)/*-dalpha*/);
+    c = color(red(c), green(c), blue(c), alpha(c)-dalpha);
     fill(c);
     ellipse(x, y, 10, 10);
     ++curFadeSteps;
